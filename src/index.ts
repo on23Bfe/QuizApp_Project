@@ -90,6 +90,7 @@ function checkAnswer(answer:string) {
     if(answer===correctAnswer) {
         score++;
     }
+    nextQuestion();
 }
 
 function nextQuestion() {
@@ -98,10 +99,15 @@ function nextQuestion() {
         showQuestion();
         showChoice1();showChoice2();showChoice3();
     } else {
-        if(resultElement!==null) {
-            resultElement.innerText=`Fertig! Deine Punktzahl: ${score}/{quizData.length}`;
-        }
+        showResult();
     }
+}
+
+function showResult() {
+    if(resultElement){
+        resultElement.innerText = `Du hast ${score} von ${quizData.length} erreicht.`;
+    }
+
 }
 
 showQuestion();
