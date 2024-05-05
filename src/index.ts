@@ -12,25 +12,25 @@ type quizDataType = {
 const quizData: quizDataType[] = [
 
     {
-        question: "Frage",
-        choice1: "Antwort1",
-        choice2: "Antwort2",
-        choice3: "Antwort3",
-        answer: "Antwort1"
+        question: "Wie wird eine Variable in JavaScript deklariert, die ihren Wert nicht ändern kann?",
+        choice1: "let",
+        choice2: "const",
+        choice3: "var",
+        answer: "const"
     },
     {
-        question: "Frage 2",
-        choice1: "Antwort1",
-        choice2: "Antwort2",
-        choice3: "Antwort3",
-        answer: "Antwort1"
+        question: "Welche Methode wird verwendet, um die Länge eines Arrays in JavaScript zu erhalten?",
+        choice1: "array.length",
+        choice2: "array.count()",
+        choice3: "array.size()",
+        answer: "array.length"
     },
     {
-        question: "Frage 3",
-        choice1: "Antwort1",
-        choice2: "Antwort2",
-        choice3: "Antwort3",
-        answer: "Antwort1"
+        question: "Welche der folgenden ist eine korrekte Art, eine leere Liste (Array) in JavaScript zu erstellen?",
+        choice1: "var myList = []",
+        choice2: "var myList = ()",
+        choice3: "var myList = {}",
+        answer: "var myList = []"
     }
 ];
 
@@ -39,7 +39,6 @@ const questionElement = document.getElementById("question");
 const choice1Element = document.getElementById("choice1");
 const choice2Element = document.getElementById("choice2");
 const choice3Element = document.getElementById("choice3");
-const submitButton = document.getElementById("submit");
 const resultElement = document.getElementById("result");
 
 
@@ -66,12 +65,47 @@ function showChoice1() {
     }
 }
 
+function showChoice2() {
+    const choice2 = quizData[currentQuestion].choice2; 
 
+   if(choice2Element!=null)
+    {
+        choice2Element.innerText = choice2; //bei Anzeige von nächster Frage, werden alte Antwortmöglichkeiten entfernt
+     
+    }
+}
 
+function showChoice3() {
+    const choice3 = quizData[currentQuestion].choice3; 
 
+   if(choice3Element!=null)
+    {
+        choice3Element.innerText = choice3; //bei Anzeige von nächster Frage, werden alte Antwortmöglichkeiten entfernt
+     
+    }
+}
 
+function checkAnswer(answer:string) {
+    const correctAnswer = quizData[currentQuestion].answer;
+    if(answer===correctAnswer) {
+        score++;
+    }
+}
 
+function nextQuestion() {
+    currentQuestion++;
+    if(currentQuestion < quizData.length) {
+        showQuestion();
+        showChoice1();showChoice2();showChoice3();
+    } else {
+        if(resultElement!==null) {
+            resultElement.innerText=`Fertig! Deine Punktzahl: ${score}/{quizData.length}`;
+        }
+    }
+}
 
 showQuestion();
 showChoice1();
+showChoice2();
+showChoice3();
 
