@@ -1,116 +1,116 @@
-// Imports use relative file paths or Node.js package names
-import { textInput } from './dom-utils';
+import { choice1Element as choice1Button, choice2Element as choice2Button, choice3Element as choice3Button, questionElement, restartElement, resultElement } from "./utils";
 
-type quizDataType = {
-    question:string;
-    choice1:string;
-    choice2:string;
-    choice3:string;
-    answer:string;
-}
+import { quizData } from "./questions";
 
-const quizData: quizDataType[] = [
-
-    {
-        question: "Wie wird eine Variable in JavaScript deklariert, die ihren Wert nicht ändern kann?",
-        choice1: "let",
-        choice2: "const",
-        choice3: "var",
-        answer: "const"
-    },
-    {
-        question: "Welche Methode wird verwendet, um die Länge eines Arrays in JavaScript zu erhalten?",
-        choice1: "array.length",
-        choice2: "array.count()",
-        choice3: "array.size()",
-        answer: "array.length"
-    },
-    {
-        question: "Welche der folgenden ist eine korrekte Art, eine leere Liste (Array) in JavaScript zu erstellen?",
-        choice1: "var myList = []",
-        choice2: "var myList = ()",
-        choice3: "var myList = {}",
-        answer: "var myList = []"
-    }
-];
-
-//Web API
-const questionElement = document.getElementById("question");
-const choice1Element = document.getElementById("choice1");
-const choice2Element = document.getElementById("choice2");
-const choice3Element = document.getElementById("choice3");
-const resultElement = document.getElementById("result");
-
-
-
-var currentQuestion:number = 0;
-var score:number = 0;
+var currentQuestion: number = 0; //Initialer Startwert (Quiz fängt von vorne an)
+var score: number = 0; //Score beginnt bei 0
 
 function showQuestion() {
-    const question = quizData[currentQuestion].question; //hole erste Frage aus Fragenarray
-    
-    if(questionElement!=null)
-    {
-        questionElement.innerText = question;//Frage in p tag anzeigen
-    } 
+  const question = quizData[currentQuestion].question; //hole erste Frage aus Fragenarray
+
+  if (questionElement != null) {
+    questionElement.innerText = question; //Frage in p tag anzeigen
+  }
 }
 
 function showChoice1() {
-    const choice1 = quizData[currentQuestion].choice1; 
+  const choice1 = quizData[currentQuestion].choice1; //aktuelle Antwort in Variable zwischenspeichern
 
-   if(choice1Element!=null)
-    {
-        choice1Element.innerText = choice1; //bei Anzeige von nächster Frage, werden alte Antwortmöglichkeiten entfernt
-     
-    }
+  if (choice1Button != null) { //prüft ob choice1 Button in HTML gefunden
+    choice1Button.innerText = choice1; //zeigt Antwort an
+  }
 }
 
 function showChoice2() {
-    const choice2 = quizData[currentQuestion].choice2; 
+  const choice2 = quizData[currentQuestion].choice2; //aktuelle Antwort in Variable zwischenspeichern
 
-   if(choice2Element!=null)
-    {
-        choice2Element.innerText = choice2; //bei Anzeige von nächster Frage, werden alte Antwortmöglichkeiten entfernt
-     
-    }
+  if (choice2Button != null) { //prüft ob Button in HTML
+    choice2Button.innerText = choice2; //zeigt Antwort an
+  }
 }
 
 function showChoice3() {
-    const choice3 = quizData[currentQuestion].choice3; 
+  const choice3 = quizData[currentQuestion].choice3; //aktuelle Antwort in Variable zwischenspeichern
 
-   if(choice3Element!=null)
-    {
-        choice3Element.innerText = choice3; //bei Anzeige von nächster Frage, werden alte Antwortmöglichkeiten entfernt
-     
-    }
+  if (choice3Button != null) { //prüft ob Button in HTML
+    choice3Button.innerText = choice3; //zeigt Antwort an
+  }
 }
 
-function checkAnswer(answer:string) {
-    const correctAnswer = quizData[currentQuestion].answer;
-    if(answer===correctAnswer) {
-        score++;
-    }
-    nextQuestion();
+function checkAnswer(answer: string) { //answer als string definiert
+  const correctAnswer = quizData[currentQuestion].answer; //für die aktuelle Frage dir richtige Antwort
+  if (answer == correctAnswer) { //prüft ob Antwort korrkt
+    score++; //zählt score hoch (inkrement)
+  }
+  nextQuestion(); //nach Prüfung wird nächste Frage angezeigt
 }
 
 function nextQuestion() {
-    currentQuestion++;
-    if(currentQuestion < quizData.length) {
-        showQuestion();
-        showChoice1();showChoice2();showChoice3();
-    } else {
-        showResult();
-    }
+  currentQuestion++; //springt zur nächsten Frage
+  if (currentQuestion < quizData.length) {//prüft Länge quizData, wenn currentQuestion nicht mehr < Länge, Anzeige Result
+    showQuestion();
+    showChoice1();
+    showChoice2();
+    showChoice3();
+  } else {
+    showResult();
+  }
 }
 
 function showResult() {
-    if(resultElement){
-        resultElement.innerText = `Du hast ${score} von ${quizData.length} erreicht.`;
-    }
+  if (resultElement != null) {
+        resultElement.innerText = `Du hast ${score} von ${quizData.length} erreicht.`; //Ergebnisanzeige
+  }
+  if (restartElement != null) {
+        restartElement.className = ""; //Button für Neustart am Ende des Quiz anzeigen
+  }
+  if (questionElement != null) {
+        questionElement.className = "hidden"; //Frage verstecken, wenn Neustart Button angezeigt wird
+  }
+
+  if (choice1Button != null) {
+        choice1Button.className = "hidden"; //Antwort verstecken, indem CSS Klasse hidden hinzugefügt wird
+  }
+
+  if (choice2Button != null) {
+        choice2Button.className = "hidden"; //Antwort verstecken, indem CSS Klasse hidden hinzugefügt wird
+  }
+
+  if (choice3Button != null) {
+        choice3Button.className = "hidden"; //Antwort verstecken, indem CSS Klasse hidden hinzugefügt wird
+  }
 
 }
 
-showQuestion();
+if (choice1Button != null) {
+  let choice1 = quizData[currentQuestion].choice1;
+  choice1Button.addEventListener("click", () => {
+    checkAnswer(choice1); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen)
+  });
+}
+
+if (choice2Button != null) {
+  let choice2 = quizData[currentQuestion].choice2;
+  choice2Button.addEventListener("click", () => {
+    checkAnswer(choice2); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+  });
+}
+
+if (choice3Button != null) {
+  let choice3 = quizData[currentQuestion].choice3;
+  choice3Button.addEventListener("click", () => {
+    checkAnswer(choice3); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+  });
+}
+
+if (restartElement != null) {
+  restartElement.addEventListener("click", () => { //damit der Button was er beim click zu tun hat.
+    window.location.reload(); //für Neuladen der Seite, damit Quiz von vorne beginnt
+  });
+}
+
+//damit Frage + Antwort beim ersten mal angezeigt wird.
+showQuestion(); 
 showChoice1();
 showChoice2();
 showChoice3();

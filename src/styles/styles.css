@@ -42,6 +42,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    width: 280px;
 }
 
 button:hover {
@@ -62,8 +63,11 @@ button:hover {
     height: 100%;
     pointer-events: none;
     z-index: -1;
-    background-image: url('code-icon.jpeg');
+    background-image: url('../../assets/code-icon.jpeg');
     background-size: cover;
     background-position: center;
 }
 
+.hidden {
+    display:none
+}
