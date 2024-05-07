@@ -38,8 +38,8 @@ function showChoice3() {
 }
 
 function checkAnswer(answer: string) { //answer als string definiert
-  const correctAnswer = quizData[currentQuestion].answer; //für die aktuelle Frage dir richtige Antwort
-  if (answer == correctAnswer) { //prüft ob Antwort korrkt
+  const correctAnswer = quizData[currentQuestion].answer; //für die aktuelle Frage, die richtige Antwort
+  if (answer === correctAnswer) { //prüft ob Antwort korrekt
     score++; //zählt score hoch (inkrement)
   }
   nextQuestion(); //nach Prüfung wird nächste Frage angezeigt
@@ -85,21 +85,21 @@ function showResult() {
 if (choice1Button != null) {
   let choice1 = quizData[currentQuestion].choice1;
   choice1Button.addEventListener("click", () => {
-    checkAnswer(choice1); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen)
+    checkAnswer(quizData[currentQuestion].choice1); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen)
   });
 }
 
 if (choice2Button != null) {
   let choice2 = quizData[currentQuestion].choice2;
   choice2Button.addEventListener("click", () => {
-    checkAnswer(choice2); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+    checkAnswer(quizData[currentQuestion].choice2); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
   });
 }
 
 if (choice3Button != null) {
   let choice3 = quizData[currentQuestion].choice3;
   choice3Button.addEventListener("click", () => {
-    checkAnswer(choice3); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+    checkAnswer(quizData[currentQuestion].choice3); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
   });
 }
 
