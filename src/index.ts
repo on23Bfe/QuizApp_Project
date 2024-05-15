@@ -59,7 +59,7 @@ function nextQuestion() {
 
 function showResult() {
   if (resultElement != null) {
-        resultElement.innerText = `Du hast ${score} von ${quizData.length} Punkten erreicht.`; //Ergebnisanzeige
+        resultElement.innerText = `Du hast ${score} Fragen von ${quizData.length} richtig beantwortet.`; //Ergebnisanzeige
   }
   if (restartElement != null) {
         restartElement.className = ""; //Button für Neustart am Ende des Quiz anzeigen
@@ -109,7 +109,7 @@ if (restartElement != null) {
   });
 }
 
-//damit Frage + Antwort beim ersten mal angezeigt wird.
+//Initalisierung des Quiz, damit Frage + Antwort beim ersten mal angezeigt wird.
 showQuestion(); 
 showChoice1();
 showChoice2();
