@@ -59,7 +59,7 @@ function nextQuestion() {
 
 function showResult() {
   if (resultElement != null) {
-        resultElement.innerText = `Du hast ${score} von ${quizData.length} erreicht.`; //Ergebnisanzeige
+        resultElement.innerText = `Du hast ${score} von ${quizData.length} Punkten erreicht.`; //Ergebnisanzeige
   }
   if (restartElement != null) {
         restartElement.className = ""; //Button für Neustart am Ende des Quiz anzeigen
@@ -85,26 +85,26 @@ function showResult() {
 if (choice1Button != null) {
   let choice1 = quizData[currentQuestion].choice1;
   choice1Button.addEventListener("click", () => {
-    checkAnswer(quizData[currentQuestion].choice1); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen)
+    checkAnswer(quizData[currentQuestion].choice1); //damit der Button weiß, was er beim click zu tun hat (nächste Frage anzeigen)
   });
 }
 
 if (choice2Button != null) {
   let choice2 = quizData[currentQuestion].choice2;
   choice2Button.addEventListener("click", () => {
-    checkAnswer(quizData[currentQuestion].choice2); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+    checkAnswer(quizData[currentQuestion].choice2); //damit der Button weiß, was er beim click zu tun hat (nächste Frage anzeigen).
   });
 }
 
 if (choice3Button != null) {
   let choice3 = quizData[currentQuestion].choice3;
   choice3Button.addEventListener("click", () => {
-    checkAnswer(quizData[currentQuestion].choice3); //damit der Button was er beim click zu tun hat (nächste Frage anzeigen).
+    checkAnswer(quizData[currentQuestion].choice3); //damit der Button weiß, was er beim click zu tun hat (nächste Frage anzeigen).
   });
 }
 
 if (restartElement != null) {
-  restartElement.addEventListener("click", () => { //damit der Button was er beim click zu tun hat.
+  restartElement.addEventListener("click", () => { //damit der Button weiß, was er beim click zu tun hat.
     window.location.reload(); //für Neuladen der Seite, damit Quiz von vorne beginnt
   });
 }
